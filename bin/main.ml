@@ -24,7 +24,8 @@ let load_state () : Types.state_main_t =
 
 let update_state_entity (state : Types.state_entity_t) : Types.state_entity_t =
   let get_axis_press positive_key negative_key =
-    (if positive_key () then 1. else 0.) -. if negative_key () then 1. else 0.
+    let is_key key = if key () then 1. else 0. in
+    is_key positive_key -. is_key negative_key
   in
   let next_dir =
     match state.dir with
@@ -44,37 +45,34 @@ let update_state_entity (state : Types.state_entity_t) : Types.state_entity_t =
   | Some dir ->
     let dx = get_axis_press Utils.is_go_right Utils.is_go_left in
     let dy = get_axis_press Utils.is_go_down Utils.is_go_up in
-    let x = Vector2.x state.pos +. (dx *. Constants.sprite_step) in
-    let y = Vector2.y state.pos +. (dy *. Constants.sprite_step) in
+    let next_pos =
+      Vector2.create
+        (Vector2.x state.pos +. (dx *. Constants.sprite_step))
+        (Vector2.y state.pos +. (dy *. Constants.sprite_step))
+    in
     let next_step =
       if dir = state.dir then (state.step + 1) mod (state.speed * 4) else state.step
     in
-    let next_pos = Vector2.create x y in
     { state with pos = next_pos; dir; step = next_step }
   | None -> state
 ;;
 
 let update_state_resource (resource : Types.state_resource_t) =
-  if Unix.gettimeofday () -. resource.last_time < resource.interval
+  let now = Unix.gettimeofday () in
+  if now -. resource.last_time < resource.interval
   then resource
-  else
-    (let new_resource = Generator.create_random_resource () in
-     { sprite = new_resource.sprite
-     ; pos = new_resource.pos
-     ; interval = new_resource.interval
-     ; last_time = Unix.gettimeofday ()
-     ; value = resource.value +. 1.
-     ; _type = new_resource._type
-     }
-     : Types.state_resource_t)
+  else (
+    let next = Generator.create_random_resource () in
+    { next with value = resource.value +. 1.; last_time = now })
+;;
+
+let update_state (state : Types.state_main_t) : Types.state_main_t =
+  { player = { base = update_state_entity state.player.base; team = state.player.team }
+  ; resource = update_state_resource state.resource
+  }
 ;;
 
 let rec loop (state : Types.state_main_t) : unit =
-  let update_state (state : Types.state_main_t) : Types.state_main_t =
-    { player = { base = update_state_entity state.player.base; team = state.player.team }
-    ; resource = update_state_resource state.resource
-    }
-  in
   if Raylib.window_should_close ()
   then Raylib.close_window ()
   else (
