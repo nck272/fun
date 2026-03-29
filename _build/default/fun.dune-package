@@ -1,4 +1,4 @@
-(lang dune 3.22)
+(lang dune 3.21)
 (name fun)
 (sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/fun))
 (files

@@ -1,1 +1,1 @@
-lib/constants.ml: Raylib Types
+lib/constants.ml:

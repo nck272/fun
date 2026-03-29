@@ -1,7 +1,5 @@
 open Raylib
-open Utils
 open Types
-open Constants
 
 let draw_entity (entity : state_entity_t) =
   let w, h = Utils.get_size entity.sprite in

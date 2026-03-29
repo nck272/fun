@@ -1,6 +1,5 @@
 open Raylib
 open Types
-open Constants
 
 let create_pokemon_random_at () : state_entity_t =
   Random.self_init ();
