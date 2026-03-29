@@ -1,0 +1,6 @@
+description = ""
+requires = "raylib"
+archive(byte) = "fun.cma"
+archive(native) = "fun.cmxa"
+plugin(byte) = "fun.cma"
+plugin(native) = "fun.cmxs"

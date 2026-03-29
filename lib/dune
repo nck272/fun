@@ -1,2 +1,5 @@
 (library
- (name fun))
+ (name fun)
+ (public_name fun)
+ (modules types constants utils renderer)
+ (libraries raylib))

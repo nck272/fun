@@ -1,7 +1,33 @@
 lib: [
   "_build/install/default/lib/fun/META"
+  "_build/install/default/lib/fun/constants.ml"
   "_build/install/default/lib/fun/dune-package"
+  "_build/install/default/lib/fun/fun.a"
+  "_build/install/default/lib/fun/fun.cma"
+  "_build/install/default/lib/fun/fun.cmi"
+  "_build/install/default/lib/fun/fun.cmt"
+  "_build/install/default/lib/fun/fun.cmx"
+  "_build/install/default/lib/fun/fun.cmxa"
+  "_build/install/default/lib/fun/fun.ml"
+  "_build/install/default/lib/fun/fun__Constants.cmi"
+  "_build/install/default/lib/fun/fun__Constants.cmt"
+  "_build/install/default/lib/fun/fun__Constants.cmx"
+  "_build/install/default/lib/fun/fun__Renderer.cmi"
+  "_build/install/default/lib/fun/fun__Renderer.cmt"
+  "_build/install/default/lib/fun/fun__Renderer.cmx"
+  "_build/install/default/lib/fun/fun__Types.cmi"
+  "_build/install/default/lib/fun/fun__Types.cmt"
+  "_build/install/default/lib/fun/fun__Types.cmx"
+  "_build/install/default/lib/fun/fun__Utils.cmi"
+  "_build/install/default/lib/fun/fun__Utils.cmt"
+  "_build/install/default/lib/fun/fun__Utils.cmx"
   "_build/install/default/lib/fun/opam"
+  "_build/install/default/lib/fun/renderer.ml"
+  "_build/install/default/lib/fun/types.ml"
+  "_build/install/default/lib/fun/utils.ml"
+]
+libexec: [
+  "_build/install/default/lib/fun/fun.cmxs"
 ]
 bin: [
   "_build/install/default/bin/fun"

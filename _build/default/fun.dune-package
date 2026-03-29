@@ -1,4 +1,69 @@
 (lang dune 3.22)
 (name fun)
-(sections (lib .) (bin ../../bin))
-(files (lib (META dune-package opam)) (bin (fun)))
+(sections (lib .) (libexec .) (bin ../../bin))
+(files
+ (lib
+  (META
+   constants.ml
+   dune-package
+   fun.a
+   fun.cma
+   fun.cmi
+   fun.cmt
+   fun.cmx
+   fun.cmxa
+   fun.ml
+   fun__Constants.cmi
+   fun__Constants.cmt
+   fun__Constants.cmx
+   fun__Renderer.cmi
+   fun__Renderer.cmt
+   fun__Renderer.cmx
+   fun__Types.cmi
+   fun__Types.cmt
+   fun__Types.cmx
+   fun__Utils.cmi
+   fun__Utils.cmt
+   fun__Utils.cmx
+   opam
+   renderer.ml
+   types.ml
+   utils.ml))
+ (libexec (fun.cmxs))
+ (bin (fun)))
+(library
+ (name fun)
+ (kind normal)
+ (archives (byte fun.cma) (native fun.cmxa))
+ (plugins (byte fun.cma) (native fun.cmxs))
+ (native_archives fun.a)
+ (requires raylib)
+ (main_module_name Fun)
+ (modes byte native)
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name fun)
+     (visibility public)
+     (kind alias)
+     (source (path Fun) (impl (path fun.ml-gen))))
+    (name Fun)
+    (modules
+     (module
+      (obj_name fun__Constants)
+      (visibility public)
+      (source (path Constants) (impl (path constants.ml))))
+     (module
+      (obj_name fun__Renderer)
+      (visibility public)
+      (source (path Renderer) (impl (path renderer.ml))))
+     (module
+      (obj_name fun__Types)
+      (visibility public)
+      (source (path Types) (impl (path types.ml))))
+     (module
+      (obj_name fun__Utils)
+      (visibility public)
+      (source (path Utils) (impl (path utils.ml))))))
+   (wrapped true))))
