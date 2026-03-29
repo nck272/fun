@@ -1,6 +1,11 @@
 open Raylib
 open Fun
 
+let setup () : unit =
+  Raylib.init_window Constants.window_width Constants.window_height "Fun";
+  Raylib.set_target_fps Constants.target_fps
+;;
+
 let load_state () : Types.state_main_t =
   ({ player =
        { base =
@@ -12,6 +17,7 @@ let load_state () : Types.state_main_t =
            }
        ; team = { states = [] }
        }
+   ; resource = Generator.create_random_resource ()
    }
    : Types.state_main_t)
 ;;
@@ -48,14 +54,25 @@ let update_state_entity (state : Types.state_entity_t) : Types.state_entity_t =
   | None -> state
 ;;
 
-let setup () : unit =
-  Raylib.init_window Constants.window_width Constants.window_height "Fun";
-  Raylib.set_target_fps Constants.target_fps
+let update_state_resource (resource : Types.state_resource_t) =
+  if Unix.gettimeofday () -. resource.last_time < resource.interval
+  then resource
+  else
+    (let new_resource = Generator.create_random_resource () in
+     { sprite = new_resource.sprite
+     ; pos = new_resource.pos
+     ; interval = new_resource.interval
+     ; last_time = Unix.gettimeofday ()
+     ; value = resource.value +. 1.
+     ; _type = new_resource._type
+     }
+     : Types.state_resource_t)
 ;;
 
 let rec loop (state : Types.state_main_t) : unit =
   let update_state (state : Types.state_main_t) : Types.state_main_t =
     { player = { base = update_state_entity state.player.base; team = state.player.team }
+    ; resource = update_state_resource state.resource
     }
   in
   if Raylib.window_should_close ()
@@ -63,9 +80,8 @@ let rec loop (state : Types.state_main_t) : unit =
   else (
     Raylib.begin_drawing ();
     Raylib.clear_background Color.raywhite;
-    let random_pokemon = Generator.create_pokemon_random_at () in
-    Renderer.draw_entity random_pokemon;
     Renderer.draw_entity state.player.base;
+    Renderer.draw_resource state.resource;
     Raylib.end_drawing ();
     update_state state |> loop)
 ;;

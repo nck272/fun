@@ -1,5 +1,5 @@
 description = ""
-requires = "raylib"
+requires = "raylib unix"
 archive(byte) = "fun.cma"
 archive(native) = "fun.cmxa"
 plugin(byte) = "fun.cma"

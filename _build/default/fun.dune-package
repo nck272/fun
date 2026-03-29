@@ -1,4 +1,4 @@
-(lang dune 3.21)
+(lang dune 3.22)
 (name fun)
 (sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/fun))
 (files
@@ -42,7 +42,7 @@
  (archives (byte fun.cma) (native fun.cmxa))
  (plugins (byte fun.cma) (native fun.cmxs))
  (native_archives fun.a)
- (requires raylib)
+ (requires raylib unix)
  (main_module_name Fun)
  (modes byte native)
  (modules
