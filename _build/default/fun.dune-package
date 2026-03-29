@@ -16,6 +16,9 @@
    fun__Constants.cmi
    fun__Constants.cmt
    fun__Constants.cmx
+   fun__Generator.cmi
+   fun__Generator.cmt
+   fun__Generator.cmx
    fun__Renderer.cmi
    fun__Renderer.cmt
    fun__Renderer.cmx
@@ -25,6 +28,7 @@
    fun__Utils.cmi
    fun__Utils.cmt
    fun__Utils.cmx
+   generator.ml
    opam
    renderer.ml
    types.ml
@@ -55,6 +59,10 @@
       (obj_name fun__Constants)
       (visibility public)
       (source (path Constants) (impl (path constants.ml))))
+     (module
+      (obj_name fun__Generator)
+      (visibility public)
+      (source (path Generator) (impl (path generator.ml))))
      (module
       (obj_name fun__Renderer)
       (visibility public)

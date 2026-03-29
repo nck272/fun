@@ -63,6 +63,8 @@ let rec loop (state : Types.state_main_t) : unit =
   else (
     Raylib.begin_drawing ();
     Raylib.clear_background Color.raywhite;
+    let random_pokemon = Generator.create_pokemon_random_at () in
+    Renderer.draw_entity random_pokemon;
     Renderer.draw_entity state.player.base;
     Raylib.end_drawing ();
     update_state state |> loop)

@@ -3,6 +3,9 @@
 (** @canonical Fun.Constants *)
 module Constants = Fun__Constants
 
+(** @canonical Fun.Generator *)
+module Generator = Fun__Generator
+
 (** @canonical Fun.Renderer *)
 module Renderer = Fun__Renderer
 
