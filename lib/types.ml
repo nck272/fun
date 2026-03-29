@@ -11,6 +11,8 @@ and state_entity_t =
   { sprite : Texture.t
   ; pos : Vector2.t
   ; dir : direction_t
+  ; step : int
+  ; speed : int
   }
 
 and state_player_team_t = { states : state_pokemon_t list }

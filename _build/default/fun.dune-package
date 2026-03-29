@@ -1,6 +1,6 @@
 (lang dune 3.22)
 (name fun)
-(sections (lib .) (libexec .) (bin ../../bin))
+(sections (lib .) (libexec .) (bin ../../bin) (doc ../../doc/fun))
 (files
  (lib
   (META
@@ -30,7 +30,8 @@
    types.ml
    utils.ml))
  (libexec (fun.cmxs))
- (bin (fun)))
+ (bin (fun))
+ (doc (LICENSE README.md)))
 (library
  (name fun)
  (kind normal)

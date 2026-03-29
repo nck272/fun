@@ -1,1 +1,1 @@
-lib/utils.ml: Raylib Texture Vector2
+lib/utils.ml: Key Raylib Texture Types Vector2

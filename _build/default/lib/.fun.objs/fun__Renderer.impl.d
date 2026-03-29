@@ -1,1 +1,1 @@
-lib/renderer.ml: Color Raylib Rectangle Types Utils
+lib/renderer.ml: Color Constants Raylib Rectangle Types Utils

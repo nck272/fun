@@ -1,17 +1,12 @@
+open Raylib
 open Utils
 open Types
-open Raylib
+open Constants
 
 let draw_entity (entity : state_entity_t) =
-  let x, y = Utils.get_xy entity.pos in
-  let w, h = Utils.get_size entity.sprite entity.pos in
-  let dy =
-    match entity.dir with
-    | D -> 0.
-    | U -> h
-    | L -> 2. *. h
-    | R -> 3. *. h
-  in
-  let rect = Rectangle.create x (y +. dy) w h in
-  Raylib.draw_texture_rec entity.sprite rect entity.pos Color.white
+  let w, h = Utils.get_size entity.sprite in
+  let dx = float_of_int (entity.step / entity.speed mod 4) *. w in
+  let dy = Utils.float_of_direction entity.dir *. h in
+  let rect = Rectangle.create dx dy w h in
+  Raylib.draw_texture_rec entity.sprite rect entity.pos Color.raywhite
 ;;
